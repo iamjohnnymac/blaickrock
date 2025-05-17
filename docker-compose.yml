@@ -1,0 +1,21 @@
+services:
+  blaickrock:
+    platform: linux/amd64
+    build:
+      context: .
+    container_name: blaickrock
+    restart: unless-stopped
+    env_file:
+      - ./.env
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - .:/app
+      - /app/node_modules
+    working_dir: /app
+    # Required for WebRTC
+    privileged: true
+    # Required for WebRTC
+    cap_add:
+      - SYS_ADMIN
+      - NET_ADMIN
